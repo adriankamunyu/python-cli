@@ -68,7 +68,7 @@ def print_projects(projects, heading: str = "Projects"):
 STATUS_STYLE = {
     "pending": "[yellow]pending[/yellow]",
     "in_progress": "[blue]in progress[/blue]",
-    "complete": "[green]✔ complete[/green]",
+    "complete": "[green]complete[/green]",
 }
 
 def print_tasks(tasks, project_title: str = ""):
