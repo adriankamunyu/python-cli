@@ -1,31 +1,21 @@
 from rich.console import Console
 from rich.table import Table
 from rich.panel import Panel
-from rich.text import Text
 from rich import box
 
 console = Console()
 
-
-# ── generic helpers ────────────────────────────────────────────────────────────
-
 def success(msg: str):
-    console.print(f"[bold green]✔[/bold green]  {msg}")
-
+    console.print(f"OK {msg}")
 
 def error(msg: str):
-    console.print(f"[bold red]✘[/bold red]  {msg}")
-
+    console.print(f"ERROR {msg}")
 
 def warn(msg: str):
-    console.print(f"[bold yellow]⚠[/bold yellow]  {msg}")
-
+    console.print(f"WARN {msg}")
 
 def info(msg: str):
-    console.print(f"[bold cyan]ℹ[/bold cyan]  {msg}")
-
-
-# ── users ──────────────────────────────────────────────────────────────────────
+    console.print(f"INFO {msg}")
 
 def print_users(users):
     if not users:
@@ -47,9 +37,6 @@ def print_users(users):
         table.add_row(str(u.id), u.name, u.email, str(len(u.projects)))
 
     console.print(table)
-
-
-# ── projects ───────────────────────────────────────────────────────────────────
 
 def print_projects(projects, heading: str = "Projects"):
     if not projects:
@@ -78,15 +65,11 @@ def print_projects(projects, heading: str = "Projects"):
 
     console.print(table)
 
-
-# ── tasks ──────────────────────────────────────────────────────────────────────
-
 STATUS_STYLE = {
     "pending": "[yellow]pending[/yellow]",
     "in_progress": "[blue]in progress[/blue]",
     "complete": "[green]✔ complete[/green]",
 }
-
 
 def print_tasks(tasks, project_title: str = ""):
     if not tasks:
@@ -108,7 +91,6 @@ def print_tasks(tasks, project_title: str = ""):
 
     for t in tasks:
         status_display = STATUS_STYLE.get(t.status, t.status)
-        # Trim ISO datetime to date only
         created = t.created_at[:10] if t.created_at else "—"
         table.add_row(
             str(t.id), t.title, t.assigned_to, status_display, created
@@ -116,8 +98,6 @@ def print_tasks(tasks, project_title: str = ""):
 
     console.print(table)
 
-
-# ── project detail ─────────────────────────────────────────────────────────────
 
 def print_project_detail(project):
     lines = [

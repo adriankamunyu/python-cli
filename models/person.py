@@ -1,6 +1,5 @@
 class Person:
-    """Base class representing a person with a name and email."""
-
+    
     def __init__(self, name: str, email: str):
         self._name = name
         self._email = email

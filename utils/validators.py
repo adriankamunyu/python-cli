@@ -1,6 +1,5 @@
 import re
 
-
 def validate_email(email: str) -> str:
     """Return cleaned email or raise ValueError."""
     pattern = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
@@ -8,7 +7,6 @@ def validate_email(email: str) -> str:
     if not re.match(pattern, cleaned):
         raise ValueError(f"'{email}' is not a valid email address.")
     return cleaned
-
 
 def validate_date(date_str: str) -> str:
     """
@@ -23,7 +21,6 @@ def validate_date(date_str: str) -> str:
         raise ValueError(
             f"'{date_str}' is not a recognisable date. Use YYYY-MM-DD."
         ) from exc
-
 
 def validate_status(status: str) -> str:
     """Return normalised status string or raise ValueError."""

@@ -1,9 +1,6 @@
 from datetime import datetime
 
-
 class Task:
-    """Represents a single task inside a project."""
-
     _id_counter: int = 1
 
     def __init__(self, title: str, assigned_to: str = "Unassigned",
@@ -15,10 +12,9 @@ class Task:
 
         self._title = title
         self._assigned_to = assigned_to
-        self._status = status  # "pending" | "in_progress" | "complete"
+        self._status = status
         self._created_at = created_at or datetime.now().isoformat()
 
-    # ── properties ────────────────────────────────────────────────────────────
 
     @property
     def id(self) -> int:
@@ -57,7 +53,6 @@ class Task:
     def created_at(self) -> str:
         return self._created_at
 
-    # ── serialisation ─────────────────────────────────────────────────────────
 
     def to_dict(self) -> dict:
         return {
@@ -77,12 +72,11 @@ class Task:
             task_id=data.get("id"),
             created_at=data.get("created_at"),
         )
-        # Keep the global counter ahead of any loaded IDs
+        
         if task._id >= cls._id_counter:
             cls._id_counter = task._id + 1
         return task
 
-    # ── display ───────────────────────────────────────────────────────────────
 
     def __str__(self) -> str:
         return (

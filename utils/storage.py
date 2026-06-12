@@ -25,18 +25,12 @@ def save_data():
 
 
 def load_data():
-    """
-    Load users (with their projects and tasks) from JSON.
-    Resets the in-memory registries before loading so there are no duplicates.
-    """
-    # Reset everything before loading
     User.clear_registry()
-    # Reset ID counters so they start from 1 (from_dict will advance them)
     Project._id_counter = 1
     Task._id_counter = 1
 
     if not os.path.exists(DATA_FILE):
-        return  # nothing to load yet
+        return  
 
     try:
         with open(DATA_FILE, "r", encoding="utf-8") as f:

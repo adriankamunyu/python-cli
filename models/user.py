@@ -1,12 +1,9 @@
 from models.person import Person
 from models.project import Project
 
-
 class User(Person):
-    """A system user who owns projects. Inherits from Person."""
-
     _id_counter: int = 1
-    all_users: list["User"] = []  # class-level registry
+    all_users: list["User"] = []
 
     def __init__(self, name: str, email: str, user_id: int = None):
         super().__init__(name, email)
@@ -14,8 +11,6 @@ class User(Person):
         if user_id is None:
             User._id_counter += 1
         self._projects: list[Project] = []
-
-    # ── properties ────────────────────────────────────────────────────────────
 
     @property
     def id(self) -> int:
@@ -25,7 +20,6 @@ class User(Person):
     def projects(self) -> list[Project]:
         return list(self._projects)
 
-    # ── project management ────────────────────────────────────────────────────
 
     def add_project(self, project: Project):
         self._projects.append(project)
@@ -43,7 +37,6 @@ class User(Person):
                 return p
         return None
 
-    # ── class methods ─────────────────────────────────────────────────────────
 
     @classmethod
     def find_by_name(cls, name: str) -> "User | None":
@@ -71,7 +64,6 @@ class User(Person):
         cls.all_users.clear()
         cls._id_counter = 1
 
-    # ── serialisation ─────────────────────────────────────────────────────────
 
     def to_dict(self) -> dict:
         return {
@@ -93,8 +85,6 @@ class User(Person):
         for project_data in data.get("projects", []):
             user.add_project(Project.from_dict(project_data))
         return user
-
-    # ── display ───────────────────────────────────────────────────────────────
 
     def __str__(self) -> str:
         return (

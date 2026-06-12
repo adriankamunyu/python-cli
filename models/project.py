@@ -1,10 +1,7 @@
 from datetime import datetime
 from models.task import Task
 
-
 class Project:
-    """Represents a project that belongs to a user and contains tasks."""
-
     _id_counter: int = 1
 
     def __init__(self, title: str, description: str = "",
@@ -63,7 +60,6 @@ class Project:
     def created_at(self) -> str:
         return self._created_at
 
-    # ── task management ───────────────────────────────────────────────────────
 
     def add_task(self, task: Task):
         self._tasks.append(task)
@@ -87,7 +83,6 @@ class Project:
     def complete_tasks(self) -> list[Task]:
         return [t for t in self._tasks if t.status == "complete"]
 
-    # ── serialisation ─────────────────────────────────────────────────────────
 
     def to_dict(self) -> dict:
         return {
@@ -116,7 +111,6 @@ class Project:
             project.add_task(Task.from_dict(task_data))
         return project
 
-    # ── display ───────────────────────────────────────────────────────────────
 
     def __str__(self) -> str:
         due = f" | Due: {self._due_date}" if self._due_date else ""
